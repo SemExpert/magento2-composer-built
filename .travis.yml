@@ -8,57 +8,61 @@ addons:
     - mysql-client-core-5.6
     - mysql-client-5.6
     - postfix
-  firefox: "46.0"
+  firefox: '46.0'
   hosts:
-      - magento2.travis
+  - magento2.travis
 language: php
 php:
-#  - 7.0
-  - 7.1
+- 7.1
 env:
   global:
-    - COMPOSER_BIN_DIR=~/bin
-    - INTEGRATION_SETS=3
-    - NODE_JS_VERSION=6
-    - MAGENTO_HOST_NAME="magento2.travis"
+  - COMPOSER_BIN_DIR=~/bin
+  - INTEGRATION_SETS=3
+  - NODE_JS_VERSION=6
+  - MAGENTO_HOST_NAME="magento2.travis"
+  - secure: a3NIEnFkrKpjPoE8olvE5J5/S2X7Q6kTVO1PCgCAqSLEnbPUEdPFkkCEF80mYbTc/AN08A919PQG5jK51QuH5wLaSG293VEb6V70cIDT6hdQoCCS37T5WKpE9gH6xYta45kGstKU4Lr6yoYr/G5BWvD5sRgYdmSu7b/bk9FnDv2I9i55wkS9A90Kl76QTSreq2gORSIurLcWW+mpfvrrWh3OPjH+pu6ljXMdJRUfloD3mE8w1961IaUVYbjazKm7Pyanm+nbFJVo8XpqC7PSKs2OCoH/DpStIKeJBsuMgcb8t7TAovw95Xnt/sPbPLL1p4a3sgQMoujqUj0foYYUQ1nmYDoAzZ3LcxespciLsJ4HUPQOxUUHaNClsFYe55Oe7U+vjif6WbpuZOM85qidN2vYwEup96lOuixWcQrRsDolrrT0RkiRsotVPLZzbESFwSbJW0j7gSoO/pSMpq5f4Ra1fQVRg9WTIkqxS2KfMOCdDQqWF80JQQvB0iod2ySEqSKoQEEhMt++PR0bvNCxaHwDYEIT7ktkJasO3scpBp6Oalytcty95rut9lLzu96uaVum0aWUyUlUg8hvZCsV1bUxBO3iScl0rNIsf8oxTTs2UgTwrOI5yj3HqjnNg1oGq+ethfJ6798gbHGXaP7sJ0xhvpyjzgeki5goIO9N3JY=
+  - secure: XvGKZbJfYTYfEhYbf4iRv0AFJ1CvoEbbFIDq1yGz1PyXexnnwCgnUZIQSn4Q/MB4Of/Ro4nuer3R5EdxkWJX0rT9hL2UP9Wh8wNDJBaoNxqB8bZok2KzJU+FITwhk4UJl4bvxXVEeL2wGxq4fxj7lii+uUu2djhz5KEkUsQjYfyZG5WBSUSIVs3iAVm1GDfQzgyqef9KKpdNs0k67Ul4y4rxAI58WW9+i6Nf32PvJdft0gmWFux3g6tlG6rNSQSHEj/I10EgNpHa8mH9N9ekT4ZcXO17ZojTK+1fjjZBcZv9d6UchOgRZUm6pVlnbf6OLlYLGaUAGgRrlB//bQ0GFX3kecOBwW4YGGZArHSlNhOpY2m7jR1eqxcrAdKgWI/SPvKGov96Kg0YgHSCvLJ6R4hWO80KUtr2+9Kcw1jpOwGeDfJeCQs3C8ZzK7aACtcgeBtOiOLsHg5fH6nLSSBLNtj3QRPZr4CfHkZy7OQI+oee9GJQ12UneP9nLuY7/MasIY+ZfHi4maihdz2QMLfKLNZ+TevjiXNpesAGLJILAxmlwLOgj1bZW5hKFI7dAu5gP15V7o4T3OJL94ZRFzbK2II7YeBzn1h5HCX8K6cVWRy4IblNJu6CCp7bx9GSQiURa12OJXeKhFRp5YK93m9kxIWxlr40IKYO5W4xVIm5WKE=
   matrix:
-    - TEST_SUITE=unit
-    - TEST_SUITE=static
-    - TEST_SUITE=js GRUNT_COMMAND=spec
-    - TEST_SUITE=js GRUNT_COMMAND=static
-    - TEST_SUITE=integration INTEGRATION_INDEX=1
-    - TEST_SUITE=integration INTEGRATION_INDEX=2
-    - TEST_SUITE=integration INTEGRATION_INDEX=3
-    - TEST_SUITE=functional ACCEPTANCE_INDEX=1
-    - TEST_SUITE=functional ACCEPTANCE_INDEX=2
+  - TEST_SUITE=unit
+  - TEST_SUITE=static
+  - TEST_SUITE=js GRUNT_COMMAND=spec
+  - TEST_SUITE=js GRUNT_COMMAND=static
+  - TEST_SUITE=integration INTEGRATION_INDEX=1
+  - TEST_SUITE=integration INTEGRATION_INDEX=2
+  - TEST_SUITE=integration INTEGRATION_INDEX=3
+  - TEST_SUITE=functional ACCEPTANCE_INDEX=1
+  - TEST_SUITE=functional ACCEPTANCE_INDEX=2
 matrix:
   exclude:
-    - php: 7.0
-      env: TEST_SUITE=static
-    - php: 7.0
-      env: TEST_SUITE=js GRUNT_COMMAND=spec
-    - php: 7.0
-      env: TEST_SUITE=js GRUNT_COMMAND=static
-    - php: 7.0
-      env: TEST_SUITE=functional ACCEPTANCE_INDEX=1
-    - php: 7.0
-      env: TEST_SUITE=functional ACCEPTANCE_INDEX=2
+  - php: 7.0
+    env: TEST_SUITE=static
+  - php: 7.0
+    env: TEST_SUITE=js GRUNT_COMMAND=spec
+  - php: 7.0
+    env: TEST_SUITE=js GRUNT_COMMAND=static
+  - php: 7.0
+    env: TEST_SUITE=functional ACCEPTANCE_INDEX=1
+  - php: 7.0
+    env: TEST_SUITE=functional ACCEPTANCE_INDEX=2
 cache:
   apt: true
   directories:
-    - $HOME/.composer/cache
-    - $HOME/.nvm
-    - $HOME/node_modules
-    - $HOME/yarn.lock
-before_install: ./dev/travis/before_install.sh
-install: composer install --no-interaction --prefer-dist
-before_script: ./dev/travis/before_script.sh
+  - "$HOME/.composer/cache"
+  - "$HOME/.nvm"
+  - "$HOME/node_modules"
+  - "$HOME/yarn.lock"
+before_install: "./dev/travis/before_install.sh"
+install: 
+  - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}" > auth.json
+  - composer install --no-interaction --prefer-dist
+before_script: "./dev/travis/before_script.sh"
 script:
-  # Set arguments for variants of phpunit based tests; '|| true' prevents failing script when leading test fails
-  - test $TEST_SUITE = "static" && TEST_FILTER='--filter "Magento\\Test\\Php\\LiveCodeTest"' || true
-  - test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php' || true
-
-  # The scripts for grunt/phpunit type tests
-  - if [ $TEST_SUITE == "functional" ]; then dev/tests/functional/vendor/phpunit/phpunit/phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
-  - if [ $TEST_SUITE != "functional" ] && [ $TEST_SUITE != "js" ]; then phpunit -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
-  - if [ $TEST_SUITE == "js" ]; then grunt $GRUNT_COMMAND; fi
+- test $TEST_SUITE = "static" && TEST_FILTER='--filter "Magento\\Test\\Php\\LiveCodeTest"'
+  || true
+- test $TEST_SUITE = "functional" && TEST_FILTER='dev/tests/functional/testsuites/Magento/Mtf/TestSuite/InjectableTests.php'
+  || true
+- if [ $TEST_SUITE == "functional" ]; then dev/tests/functional/vendor/phpunit/phpunit/phpunit
+  -c dev/tests/$TEST_SUITE $TEST_FILTER; fi
+- if [ $TEST_SUITE != "functional" ] && [ $TEST_SUITE != "js" ]; then phpunit -c dev/tests/$TEST_SUITE
+  $TEST_FILTER; fi
+- if [ $TEST_SUITE == "js" ]; then grunt $GRUNT_COMMAND; fi
