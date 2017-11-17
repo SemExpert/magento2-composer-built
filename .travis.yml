@@ -55,7 +55,9 @@ before_install: "./dev/travis/before_install.sh"
 install: 
   - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}" > auth.json
   - composer install --no-interaction --prefer-dist
-before_script: "./dev/travis/before_script.sh"
+before_script: 
+  - chmod ./dev/travis/before_script.sh
+  - "./dev/travis/before_script.sh"
 script:
 - test $TEST_SUITE = "static" && TEST_FILTER='--filter "Magento\\Test\\Php\\LiveCodeTest"'
   || true
